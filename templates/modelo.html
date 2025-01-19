@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">  
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Información del Modelo</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='modelo.css') }}">
+    </head> 
+    <body>    
+        <div class="PaginaModelo">      
+            <div class="Sidebar">         
+                <div class="LogoContainer">
+                    <img src="{{ url_for('static', filename='Logotipo.png') }}" alt="Logotipo" class="Icon">
+                </div>
+                <div class="Menu">
+                    <a href="{{ url_for('index') }}" class="MenuButton">Página Principal</a>
+                    <a href="{{ url_for('camara') }}" class="MenuButton">Sistema de Cámara</a>
+                    <a href="{{ url_for('entrenar') }}" class="MenuButton">Entrenamiento del Modelo</a>
+                    <a href="{{ url_for('configurar') }}" class="MenuButton">Configuración del Modelo</a>
+                </div>                
+            </div>            
+            <div class="Content">                
+                <div class="Header">
+                    <div class="Bienvenida">
+                        <div class="T1B">Bienvenido Sr/Sra Supervisor de EPP</div>
+                        <div class="T2B">Insighters</div>
+                    </div>
+                </div>
+                <div class="Contenido">                    
+                    <div class="T1C">Información del modelo del sistema</div>
+                    <div class="T2C">Ultralytics YOLOv8</div>                   
+                    <div class="Seccion">
+                        <img src="{{ url_for('static', filename='Yolov8.png') }}" alt="Yolov8 Logo" class="logo-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dialogOverlay" class="dialog-overlay" onclick="closeDialog()">            
+            <div id="dialogBox" class="dialog-box" onclick="event.stopPropagation()">
+                <p>El modelo por el cual funciona nuestro sistema de detección es YOLOv8, la última versión del famoso sistema de detección
+                de objetos, fue entrenado teniendo como base dos set de datos compuestos de personas en ambientes laborales usando cascos de
+                seguridad y otros casos de personas sin dicho implemento de seguridad, para darle una mayor confiabilidad al sistema, el
+                segundo dataset sirve para confirmar los valores.
+                <br><br>
+                El link al <a href="https://drive.google.com/drive/folders/12l2lJM-pcZXJZQTRkf6YfJ98eGtVpYXs?usp=drive_link" target="_blank">primer dataset</a>. 
+                El link al <a href="https://drive.google.com/drive/folders/1o3joOpPPZduH2Bq7xx76N80mWw-mlpf2?usp=drive_link" target="_blank">segundo dataset</a>.
+                </p>   
+            </div>
+        </div>
+        <script>
+            // Muestra el cuadro de diálogo
+            function openDialog() {
+                document.getElementById("dialogOverlay").style.display = "flex";
+            }
+            // Cierra el cuadro de diálogo
+            function closeDialog() {
+                document.getElementById("dialogOverlay").style.display = "none";
+            }
+            // Agrega un evento para mostrar el cuadro de diálogo al hacer clic en la imagen
+            document.addEventListener("DOMContentLoaded", function() {
+                const image = document.querySelector(".logo-image");
+                image.addEventListener("click", openDialog);
+            });
+        </script>
+    </body>
+</html>

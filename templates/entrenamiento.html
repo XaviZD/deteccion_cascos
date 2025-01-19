@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Entrenamiento del Modelo</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='entrenamiento.css') }}">   
+        <!-- Bootstrap para estilos y notificaciones -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>    
+        <div class="PaginaEntrenamiento custom-font">        
+            <!-- Menú lateral -->
+            <div class="Sidebar">            
+                <div class="LogoContainer">
+                    <img src="{{ url_for('static', filename='Logotipo.png') }}" alt="Logotipo" class="Icon">
+                </div>
+                <div class="Menu">
+                    <a href="{{ url_for('index') }}" class="MenuButton">Página Principal</a>
+                    <a href="{{ url_for('camara') }}" class="MenuButton">Detección de Cámara</a>
+                    <a href="{{ url_for('modelo') }}" class="MenuButton">Información del Modelo</a>
+                    <a href="{{ url_for('configurar') }}" class="MenuButton">Configuración del Modelo</a>
+                </div>
+            </div>        
+            <!-- Contenido principal -->
+            <div class="Content">                
+                <div class="Header">
+                    <div class="Bienvenida">
+                        <div class="T1">Bienvenido Sr/Sra Supervisor de EPP</div>
+                        <div class="T1">Insighters</div>
+                    </div>
+                </div>
+                <div class="Contenido">                
+                    <div class="T2">Detección de cascos en tiempo real</div>
+                    <div class="T2">Entrenamiento del Modelo</div>
+                    <div class="Seccion">                        
+                        <div class="container mt-5">                        
+                            <!-- Primera fila: Formularios principales -->
+                            <div class="row g-4">                           
+                                <!-- Formulario para iniciar entrenamiento -->
+                                <div class="col-auto">                               
+                                    <form action="{{ url_for('entrenar') }}" method="POST" id="entrenamiento-form" class="p-3 border rounded shadow-sm">                                        
+                                        <div class="T3">Iniciar Entrenamiento</div>                                       
+                                        <div class="mb-3">                                        
+                                            <label for="epochs" class="form-label">Número de épocas:</label>
+                                            <input type="number" id="epochs" name="epochs" class="form-control" min="1" value="1">
+                                        </div>                                        
+                                        <div class="mb-3">                                       
+                                            <label for="recipient_email" class="form-label">Correo electrónico (opcional):</label>
+                                            <input type="email" id="recipient_email" name="recipient_email" class="form-control">
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn btn-outline-primary" id="assign-email-btn" onclick="assignEmail()">Asignar Correo</button>
+                                            <button type="submit" class="btn btn-primary">Iniciar</button>
+                                        </div>                                
+                                    </form>
+                                </div>                                        
+                            </div>                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contenedor de notificaciones -->
+        <div id="notificaciones" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>
+        <!-- Script para notificaciones y actualizaciones -->
+        <script>
+            let assignedEmail = '';  
+            // Función para asignar correo
+            function assignEmail() {
+                const email = document.getElementById('recipient_email').value;
+                // Hacer una solicitud POST al servidor
+                fetch('/asignar_correo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email }) // Enviar el correo como JSON
+                })
+                .then(response => response.json()) // Convertir la respuesta a JSON
+                .then(data => {
+                    // Mostrar el mensaje recibido desde el servidor
+                    const tipo = data.status === 'success' ? 'success' : 'danger'; // Determinar el tipo de notificación
+                    mostrarNotificacion(tipo, data.message); // Mostrar notificación con el mensaje
+                })
+                .catch(() => mostrarNotificacion('danger', 'Error al conectar con el servidor.'));
+            }
+            // Función para mostrar notificaciones
+            function mostrarNotificacion(tipo, mensaje) {
+                const contenedor = document.getElementById('notificaciones');
+                const notificacion = document.createElement('div');
+                notificacion.className = `alert alert-${tipo} alert-dismissible fade show`;
+                notificacion.role = 'alert';
+                notificacion.innerHTML = `
+                ${mensaje}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                contenedor.appendChild(notificacion);
+                setTimeout(() => notificacion.remove(), 5000); // Remover tras 5 segundos
+            }
+            document.addEventListener('DOMContentLoaded', function() {
+                const entrenamientoSelect = document.getElementById('entrenamiento');
+                const cargarEntrenamientoForm = document.getElementById('cargar-entrenamiento-form');            
+                // Función para cargar la lista de archivos .pt
+                function cargarEntrenamientos() {
+                    fetch('/get_best_entrenamientos')
+                        .then(response => response.json())
+                        .then(data => {
+                            entrenamientoSelect.innerHTML = '';
+                            data.forEach(entrenamiento => {
+                                const option = document.createElement('option');
+                                option.value = entrenamiento;
+                                option.textContent = entrenamiento;
+                                entrenamientoSelect.appendChild(option);
+                            });
+                        })
+                        .catch(() => mostrarNotificacion('danger', 'No se encontraron entrenamientos.'));
+                }    
+                // Función para mostrar notificaciones
+                function mostrarNotificacion(tipo, mensaje) {
+                    const contenedor = document.getElementById('notificaciones');
+                    const notificacion = document.createElement('div');
+                    notificacion.className = `alert alert-${tipo} alert-dismissible fade show`;
+                    notificacion.role = 'alert';
+                    notificacion.innerHTML = `
+                        ${mensaje}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    `;
+                    contenedor.appendChild(notificacion);
+                    setTimeout(() => notificacion.remove(), 5000); // Remover tras 5 segundos
+                }   
+                // Manejar el envío del formulario de cargar entrenamiento
+                cargarEntrenamientoForm.addEventListener('submit', function(event) {
+                    event.preventDefault();   
+                    const formData = new FormData(cargarEntrenamientoForm);
+                    fetch('/cargar_entrenamiento', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message) {
+                            mostrarNotificacion('success', data.message); // Mensaje exitoso
+                        } else if (data.error) {
+                            mostrarNotificacion('danger', data.error); // Mensaje de error
+                        }
+                    })
+                    .catch(() => mostrarNotificacion('danger', 'Error al procesar la solicitud.'));
+                });    
+                // Llamar a la función al cargar la página
+                cargarEntrenamientos();
+            });
+        </script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>    
+    </body>
+</html>

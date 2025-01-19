@@ -1,0 +1,13 @@
+train: C:/Users/PC/Desktop/sistema cascos v2/prueba_entrenamiento/train/images
+val: C:/Users/PC/Desktop/sistema cascos v2/prueba_entrenamiento/valid/images
+test: C:/Users/PC/Desktop/sistema cascos v2/prueba_entrenamiento/test/images
+
+nc: 2
+names: ['con_casco', 'sin_casco']
+
+roboflow:
+  workspace: datasetepp-j7ioy
+  project: cas-ntct2
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/datasetepp-j7ioy/cas-ntct2/dataset/2

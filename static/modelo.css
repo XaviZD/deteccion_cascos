@@ -1,0 +1,184 @@
+html, body {
+    font-family: 'TrajanPro', Bold;
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Asegura que ocupen toda la altura */
+}
+
+.PaginaModelo {
+    display: flex;
+    align-items: stretch; /* Asegura que los hijos ocupen la misma altura */
+    height: 100%; /* Ocupa toda la altura del contenedor principal */
+}
+
+/* Barra lateral ajustada a toda la altura */
+.Sidebar {
+    width: 250px;
+    background-color: #00983D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    height: 100%; /* Se estira para ocupar toda la altura del contenedor */
+}
+
+.LogoContainer img {
+    width: 150px;
+    height: 150px;
+}
+
+.Menu {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.MenuButton {
+    width: 80%;
+    padding: 15px 0;
+    margin: 10px 0;
+    text-align: center;
+    background-color: #FDFEFF;
+    color: #56490A;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-size: 24px;
+}
+
+.MenuButton:hover {
+    background-color: #00983D;
+}
+
+.Content {
+    flex: 1; /* Permite que el contenido ocupe el espacio restante */
+    padding: 20px;
+    overflow: auto; /* Agrega scroll si el contenido es más grande que el espacio disponible */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.Header {
+    align-self: stretch;
+    padding: 32px;
+    background: white;
+    border-bottom: 1px #D9D9D9 solid;
+    display: inline-flex;
+    justify-content: space-between; /* Separa los elementos a los extremos */
+    align-items: center;
+    gap: 24px;
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.Bienvenida {
+    display: flex;
+    justify-content: space-between; /* Coloca elementos en extremos opuestos */
+    align-items: center; /* Centra los elementos verticalmente */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    padding: 0 16px; /* Opcional: agrega espacio horizontal interno */
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+}
+
+.T1B {
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-start; /* Alinea el contenido al inicio del bloque */
+    align-items: center;
+    color: #1E1E1E;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+}
+
+.T2B {
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido al final del bloque */
+    align-items: center;
+    color: #1E1E1E;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+}
+
+.Contenido {
+    align-self: stretch;
+    height: 923px;
+    padding: 16px 24px;
+    background: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 32px;
+}
+
+.T1C {
+    align-self: stretch;
+    text-align: center;
+    color: #1E1E1E;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 86.4px;
+    word-wrap: break-word;
+}
+
+.T2C {
+    align-self: stretch;
+    text-align: center;
+    color: #1E1E1E;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 86.4px;
+    word-wrap: break-word;
+}
+
+.Seccion {
+    width: 1200px;
+    height: 517px;
+    background: linear-gradient(0deg, #E3E3E3 0%, #E3E3E3 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Seccion img {
+    width: 425px;
+    height: 425px;
+    mix-blend-mode: darken;
+    border-radius: 306px;
+    transition: transform 0.3s ease;
+}
+
+.Seccion img:hover {
+    transform: scale(1.1);
+}
+
+.dialog-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.dialog-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    text-align: center;
+    z-index: 20;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Detección de EPP</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='camara.css') }}">
+    </head>
+    <body>        
+        <div class="PaginaCamara">            
+            <!-- Menú lateral -->
+            <div class="Sidebar">                
+                <div class="LogoContainer">
+                    <img src="{{ url_for('static', filename='Logotipo.png') }}" alt="Logotipo" class="Icon">
+                </div>
+                <div class="Menu">
+                    <a href="{{ url_for('index') }}" class="MenuButton">Página Principal</a>
+                    <a href="{{ url_for('modelo') }}" class="MenuButton">Información del Modelo</a>
+                    <a href="{{ url_for('entrenar') }}" class="MenuButton">Entrenamiento del Modelo</a>
+                    <a href="{{ url_for('configurar') }}" class="MenuButton">Confiuración del Modelo</a>
+                </div>
+                <!-- Botón de Pausar/Reanudar -->
+                <div class="PauseResumeButtonContainer">
+                    <button id="pauseResumeButton" class="MenuButton">Pausar Detección</button>
+                </div>
+            </div>
+            <div class="Content">                
+                <div class="Header">
+                    <div class="Bienvenida">
+                        <div class="T1B">Bienvenido Sr/Sra Supervisor de EPP</div>
+                        <div class="T2B">Insighters</div>
+                    </div>
+                </div>
+                <div class="Contenido">                
+                    <div class="T1C">Detección de cascos en tiempo real</div>
+                    <div class="Seccion">                        
+                        <div id="transmision-vivo">
+                            <div class="T1S">Transmisión en Vivo</div>
+                        </div>
+                        <!-- Contenedor de video con imagen de pausa -->
+                        <div class="video-container">
+                            <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Transmisión de Video" class="video-frame">
+                        </div>
+                        <audio id="alarm" src="{{ url_for('static', filename='alarm.mp3') }}"></audio>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <script>       
+            // Variables de estado para controlar la detección
+            let isDetectionPaused = false;
+            let detectionTimer = null;
+            const maxDetectionTime = 60000; // 60 segundos
+            const videoFeed = document.getElementById('video-feed');
+            const pauseResumeButton = document.getElementById('pauseResumeButton');
+            const transmisionVivo = document.getElementById('transmision-vivo');
+
+            // Función para alternar la pausa y reanudación de la detección
+            function toggleDetection() {
+                isDetectionPaused = !isDetectionPaused;
+                if (isDetectionPaused) {
+                    // Pausar detección
+                    pauseDetection();
+                } else {
+                    // Reanudar detección
+                    resumeDetection();
+                }
+            }
+
+            // Función para pausar la detección
+            function pauseDetection() {
+                pauseResumeButton.textContent = 'Reanudar Detección';
+                videoFeed.src = '{{ url_for("static", filename="pausa.png") }}'; // Mostrar imagen de pausa
+                clearTimeout(detectionTimer); // Detener el temporizador
+                detectionTimer = null;
+            }
+
+            // Función para reanudar la detección
+            function resumeDetection() {
+                pauseResumeButton.textContent = 'Pausar Detección';
+                videoFeed.src = '{{ url_for("video_feed") }}'; // Reanudar la transmisión del video
+                startDetectionTimer(); // Reiniciar el temporizador
+            }
+
+            // Función para iniciar el temporizador de detección
+            function startDetectionTimer() {
+                detectionTimer = setTimeout(() => {
+                    alert('El sistema se ha pausado automáticamente después de 60 segundos de ejecución.');
+                    pauseDetection();
+                }, maxDetectionTime);
+            }
+
+            // Evento del botón de Pausar/Reanudar
+            pauseResumeButton.onclick = toggleDetection;
+
+            // Ocultar el texto de "Transmisión en Vivo" cuando se cargue el video
+            videoFeed.onload = function() {
+                transmisionVivo.classList.add('hidden'); // Oculta el texto
+            };
+
+            // Iniciar la detección automáticamente al cargar la página
+            startDetectionTimer();
+        </script>    
+    </body>
+</html>

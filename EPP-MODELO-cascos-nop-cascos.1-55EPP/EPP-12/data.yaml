@@ -1,0 +1,13 @@
+names:
+- Con_casco
+- Sin_casco
+nc: 2
+roboflow:
+  license: CC BY 4.0
+  project: epp-lxkeu
+  url: https://universe.roboflow.com/datasetepp-j7ioy/epp-lxkeu/dataset/12
+  version: 12
+  workspace: datasetepp-j7ioy
+train: C:/Users/PC/Desktop/sistema cascos v2/EPP-MODELO-cascos-nop-cascos.1-55EPP/EPP-12/train/images
+val: C:/Users/PC/Desktop/sistema cascos v2/EPP-MODELO-cascos-nop-cascos.1-55EPP/EPP-12/valid/images
+test: C:/Users/PC/Desktop/sistema cascos v2/EPP-MODELO-cascos-nop-cascos.1-55EPP/EPP-12/test/images

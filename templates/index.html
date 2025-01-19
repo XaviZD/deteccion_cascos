@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Página de Inicio</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    </head>
+    <body>        
+        <div class="PaginaDeInicio">            
+            <!-- Barra lateral -->
+            <div class="Sidebar">                
+                <div class="LogoContainer">
+                    <img src="{{ url_for('static', filename='Logotipo.png') }}" alt="Logotipo" class="Icon">
+                </div>
+                <div class="Menu">
+                    <a href="{{ url_for('camara') }}" class="MenuButton">Sistema Cámara</a>
+                    <a href="{{ url_for('modelo') }}" class="MenuButton">Información Modelo</a>
+                    <a href="{{ url_for('entrenar') }}" class="MenuButton">Entrenamiento del Modelo</a>
+                    <a href="{{ url_for('configurar') }}" class="MenuButton">Configuración del Modelo</a>
+                </div>
+            </div>
+            <!-- Barra de navegación superior -->
+            <div class="Content">            
+                <div class="Header">
+                    <div class="Pila">
+                        <div class="Titulo1Pila">Bienvenido Sr/Sra Supervisor de EPP</div>
+                        <div class="Titulo2Pila">Insighters</div>
+                    </div>
+                </div>
+                <!-- Contenido principal -->
+                <div class="Contenido">                
+                    <div class="TituloContenido">Sistema de detección</div>
+                    <div class="Seccion">                    
+                        <a href="{{ url_for('camara') }}">
+                            <img src="{{ url_for('static', filename='Camara logo.png') }}" alt="Cámara Logo" class="CamaraLogo1">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>    
+</html>

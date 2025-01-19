@@ -1,0 +1,181 @@
+/* Asegura que html y body ocupen toda la ventana */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Asegura que ocupen toda la altura */
+}
+
+/* Archivo entrenamiento.css */
+.custom-font {
+    font-family: 'TrajanPro', Bold; /* Cambia por la fuente deseada */
+}
+
+.PaginaEntrenamiento {
+    display: flex;
+    align-items: stretch; /* Asegura que los hijos ocupen la misma altura */
+    height: 100%; /* Ocupa toda la altura del contenedor principal */
+}
+
+/* Barra lateral ajustada a toda la altura */
+.Sidebar {
+    width: 250px;
+    background-color: #00983D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    height: 100%; /* Se estira para ocupar toda la altura del contenedor */
+}
+
+.LogoContainer img {
+    width: 150px;
+    height: 150px;
+}
+
+.Menu {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.MenuButton {
+    width: 80%;
+    padding: 15px 0;
+    margin: 10px 0;
+    text-align: center;
+    background-color: #FDFEFF;
+    color: #56490A;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-size: 24px;
+}
+
+.MenuButton:hover {
+    background-color: #00983D;
+}
+
+.Content {
+    flex: 1; /* Permite que el contenido ocupe el espacio restante */
+    padding: 20px;
+    overflow: auto; /* Agrega scroll si el contenido es más grande que el espacio disponible */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.Header {
+    align-self: stretch;
+    padding: 32px;
+    background: white;
+    border-bottom: 1px #D9D9D9 solid;
+    display: inline-flex;
+    justify-content: space-between; /* Separa los elementos a los extremos */
+    align-items: center;
+    gap: 24px;
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.Bienvenida {
+    display: flex;
+    justify-content: space-between; /* Coloca elementos en extremos opuestos */
+    align-items: center; /* Centra los elementos verticalmente */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    padding: 0 16px; /* Opcional: agrega espacio horizontal interno */
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+}
+
+.T1 {
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-start; /* Alinea el contenido al inicio del bloque */
+    align-items: center;
+    color: #1E1E1E;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+}
+
+.Contenido {
+    align-self: stretch;
+    height: 199px;
+    padding: 1px 28px;
+    background: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 1px;    
+}
+
+.T2 {
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center; /* Alinea el contenido al final del bloque */
+    align-items: center;
+    color: #1E1E1E;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+}
+
+.Seccion {
+    width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+    background: linear-gradient(0deg, #E3E3E3 0%, #E3E3E3 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Añade un padding para evitar que el contenido toque los bordes */
+    box-sizing: border-box; /* Incluye el padding dentro del tamaño total del elemento */
+}
+
+.T3 {
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-start; /* Alinea el contenido al inicio del bloque */
+    align-items: center;
+    color: #1E1E1E;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.col-auto {
+    flex: 1 1 auto; /* Adaptar el ancho dinámicamente al contenido */
+    max-width: 300px; /* Limitar el tamaño máximo de las columnas */
+}
+
+form, .p-3 {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    width: 100%; /* Asegura que ocupe todo el ancho de la columna */
+    font-size: 20px;
+}
+
+@media (min-width: 768px) {
+    .col-md-4 {
+        flex: 1 1 30%; /* En pantallas medianas y grandes, ocupa aproximadamente un tercio del ancho */
+    }
+}
